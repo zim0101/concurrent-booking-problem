@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+    <h1>Conferences</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="conference : ${conferenceList}">
+            <td>
+                <a th:href="@{'/conference/{id}/seats'(id=${conference.id})}">
+                    <span th:text="${conference.name}"></span>
+                </a>
+            </td>
+            <td th:text="${#temporals.format(conference.startTime, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${#temporals.format(conference.endTime, 'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>
